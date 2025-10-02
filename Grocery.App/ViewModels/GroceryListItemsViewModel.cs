@@ -35,8 +35,9 @@ namespace Grocery.App.ViewModels
 
         private void Load(int id)
         {
-            MyGroceryListItems.Clear();
-            foreach (var item in _groceryListItemsService.GetAllOnGroceryListId(id)) MyGroceryListItems.Add(item);
+            var items = _groceryListItemsService.GetAllOnGroceryListId(id);
+            MyGroceryListItems = new ObservableCollection<GroceryListItem>(items);
+            OnPropertyChanged(nameof(MyGroceryListItems));
             GetAvailableProducts();
         }
 
